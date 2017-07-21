@@ -45,8 +45,8 @@ class Page {
         this._logController = data._log;
     }
 
-    pintarMensaje(){
-    	console.warn("Debes implementar el pintado");
+    pintarMensaje() {
+        console.warn("Debes implementar el pintado");
     }
 
     pintarPage() {
@@ -363,8 +363,8 @@ class Home extends NavigablePage {
         divCarousel.addEventListener("click", (event) => {
             let img = event.target;
             let url = img.getAttribute("data-link");
-            if(url){
-            	this._navigationController.navigateToUrl(url);
+            if (url) {
+                this._navigationController.navigateToUrl(url);
             }
         });
 
@@ -852,20 +852,18 @@ class Perfil extends NavigablePage {
     constructor(data) {
         super({ _url: data._url, _titulo: data._titulo, _nav: data._nav, _log: data._log });
         this._userApi = new UserApi();
+        this._borrarUser = false;
     }
 
     pintarMensaje(data) {
         let divElement = Utilities.crearElemento("div", "", "", null);
-        let msg = data.msg.errors ? data.msg.message : "Perfil modificado exitosamente.";
+        let msg = (data.msg && data.msg.errors) ? data.msg.message : "Perfil modificado exitosamente.";
         let template = `<p class="message">${msg}</p>`;
         divElement.innerHTML = template;
         document.getElementById("content").appendChild(divElement);
-        if (data.msg.username) {
-            this._logController.setLocalStorage(data.msg);
-            if (args[1]) {
-                this._navigationController.navigateToUrl("#login")
-            }
-            setTimeout(() => this._navigationController.navigateToUrl("#perfil"), 1500);
+        if (this._borrarUser) {
+            localStorage.removeItem("client");
+            this._navigationController.navigateToUrl("#login")
         }
     }
 
@@ -888,6 +886,7 @@ class Perfil extends NavigablePage {
     }
 
     borrarPerfil(event, id) {
+        this._borrarUser = true;
         event.preventDefault();
         event.stopPropagation();
         let obj = new Cliente({
@@ -895,9 +894,10 @@ class Perfil extends NavigablePage {
             email: document.getElementById("email").value,
             apellidos: document.getElementById("lastName").value,
             nombre: document.getElementById("name").value,
-            username: document.getElementById("usr").value,
+            user: document.getElementById("usr").value,
             password: document.getElementById("pwd").value
         });
+        obj.username = document.getElementById("usr").value;
         this._userApi.postUser(id, obj).then(
             (data) => {
                 this.pintarMensaje(data.msg, "#login");
@@ -913,9 +913,10 @@ class Perfil extends NavigablePage {
             email: document.getElementById("email").value,
             apellidos: document.getElementById("lastName").value,
             nombre: document.getElementById("name").value,
-            username: document.getElementById("usr").value,
+            user: document.getElementById("usr").value,
             password: document.getElementById("pwd").value
         });
+        obj.username = document.getElementById("usr").value;
         this._userApi.putUser(id, obj).then(
             (data) => {
                 this.pintarMensaje(data.msg);
