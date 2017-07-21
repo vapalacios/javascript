@@ -1,0 +1,36 @@
+body {
+    background: green;
+}
+
+.div_seprator {
+    background: brown;
+    display: block;
+    height: 17px;
+}
+
+.div-pista-arr {
+    background-color: white;
+    display: block;
+    height: auto;
+}
+
+.padding {
+    padding-left: 0px;
+}
+
+#racing {
+    display: inline-block;
+    height: inherit;
+    position: relative;
+}
+
+#selector {
+    display: inline-block;
+    position: absolute;
+    height: auto;
+    width: inherit;
+}
+
+#imgSelected {
+    display: inline-block;
+}

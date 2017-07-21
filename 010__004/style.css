@@ -1,0 +1,155 @@
+h3 {
+    display: inline-block;
+    width: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.columna {
+    height: 100%;
+    display: inline-block;
+    float: left;
+    padding: 2vw;
+}
+
+.columna-izq {
+    width: 29vw;
+    background-color: white;
+    border-right: 5px #666 solid;
+}
+
+.columna-der {
+    width: 60vw;
+    background-color: #FFFFFF;
+    background: url("img/fondo.jpg");
+}
+
+.sectionAddProduct {
+    background-color: gainsboro;
+    border-right: grey;
+    border-right-width: 2px;
+    border-right-style: solid;
+    width: 30%;
+}
+
+.padDiv {
+    padding: 12%;
+}
+
+button {
+    background: lightblue;
+}
+
+div {
+    padding: 5%;
+    height: auto;
+}
+
+#contenedor {
+    padding-top: 0%;
+    display: inline-flex;
+}
+
+.asideList {
+    height: auto;
+    padding-left: 5%;
+    margin: 0;
+}
+
+.asideSpace {
+    width: 68%;
+    padding-left: 5%;
+}
+
+input,
+button {
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+}
+
+select {
+    width: 100%;
+}
+
+
+/*table {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+th {
+    border: #000;
+    border-style: solid;
+    border-width: 1px;
+    background: gainsboro;
+}
+
+td {
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+}
+td:last-child{
+    border-right: none;
+}
+
+tbody tr:last-child td{
+    border-bottom: none;
+}*/
+
+th {
+    border: #000;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom: 1px solid #000;
+    background: gainsboro;
+}
+
+table {
+    width: 100%;
+    border: 2px solid #000;
+    font-size: 12px;
+}
+
+td {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.h2 {
+    margin-top: 1%;
+    color: white;
+}
+
+.divMesa{
+    display: inline-grid;
+    border: black;
+    border-width: thin;
+    border-style: solid;
+    font-size: 12px;
+    padding: 2%;
+    margin: 1%;
+    background: burlywood;
+}

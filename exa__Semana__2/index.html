@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Examen 2 - Tienda</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div id="contenedor">
+        <section class="columna sectionAddProduct">
+            <div class="padDiv">
+                <article>
+                    <div>
+                        <h3>Tienda de Vlairner</h3>
+                        <p>Calle General Mariano Escobedo 303</p>
+                    </div>
+                    <div>
+                        <h3>Añadir Producto:</h3>
+                    </div>
+                    <div>
+                        <label id="nombre" for="nameProducto">Nombre:</label>
+                    </div>
+                    <div>
+                        <input id="nameProducto" type="text">
+                    </div>
+                    <div>
+                        <label id="img">URL Imagen:</label>
+                    </div>
+                    <div>
+                        <select id="urlImagen" onchange="setImg(this.value)">
+                            <option value="Seleccione">Seleccione Imagen</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="price" for="precio">Precio:</label>
+                    </div>
+                    <div>
+                        <input id="precio" type="text">
+                    </div>
+                    <div>
+                        <label id="describe" for="descripcion">Descripción:</label>
+                    </div>
+                    <div>
+                        <textarea id="descripcion"></textarea>
+                    </div>
+                    <div>
+                        <button id="add" onclick="addProduct()">Añadir Producto</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <aside class="columna asideList">
+            <article class="asideSpace">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </article>
+        </aside>
+    </div>
+</body>
+
+</html>

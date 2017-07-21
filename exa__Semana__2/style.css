@@ -1,0 +1,70 @@
+body{
+	margin: 0;
+}
+.columna{
+	display: inline-block;
+}
+.sectionAddProduct {
+    background-color: gainsboro;
+    position: relative;
+    border-right: grey;
+    border-right-width: 2px;
+    border-right-style: solid;
+}
+
+.padDiv {
+    padding: 12%;
+}
+
+button {
+    background: lightblue;
+}
+
+div {
+    padding-top: 5%;
+    height: 100%;
+}
+
+#contenedor {
+    padding-top: 0%;
+    display: inline-flex;
+}
+
+.asideList {
+    height: auto;
+    position: relative;
+    padding-left: 5%;
+}
+
+.asideSpace {
+    padding-top: 18%;
+}
+
+input, button{
+	width: 100%;
+}
+
+textarea{
+	resize: none;
+	width: 100%;
+}
+
+select{
+	width: 100%;
+}
+
+table{
+	width: 100%;
+	border: 2px solid #000;
+}
+
+td{
+	text-align: center;
+	padding: 5px;
+	border-right: 2px solid #000; 
+	border-bottom: 2px solid #000;
+}
+td:last-child{
+	border-right: none; 
+	border-bottom: none;
+}

@@ -1,0 +1,64 @@
+.center{
+	text-align: center;
+}
+
+.back{
+	background: url("../img/fondo.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.modal{
+	display: block;
+}
+
+.spacing{
+	padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.message{
+	color: white;
+    background: gray;
+    margin-top: 12px;
+}
+
+.margenBotones{
+	margin-left: 12px;
+}
+
+.imgMaxWidth{
+	max-width: 25px !important;
+	opacity: 0.5;
+}
+
+.imgMaxWidth:hover{
+	opacity: 1;
+}
+
+.right{
+	text-align: right;
+	float: right;
+}
+
+.tableBackground{
+	background: white;
+}
+
+#divFooter{
+	background: #000;
+	color: white;
+}
+
+.anchoImgDash{
+	width: 100%;
+}
+
+.panel-body{
+	padding: 15px 0;
+}
+
+.small{
+	font-size: 99%;
+    color: black;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Examen 2 - Tienda</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div class="columna-izq columna columna-izq">
+        <h3>Tienda de Vlairner</h3>
+        <p>Calle General Mariano Escobedo 303</p>
+        <h3>Añadir Producto:</h3>
+        <form>
+            <label id="nombre" for="nameProducto">Nombre:</label>
+            <input id="nameProducto" type="text">
+            <label id="img">URL Imagen:</label>
+            <select id="urlImagen" onchange="setImg(this.value)">
+                <option value="Seleccione">Seleccione Imagen</option>
+            </select>
+            <label id="price" for="precio">Precio:</label>
+            <input id="precio" type="text">
+            <label id="describe" for="descripcion">Descripción:</label>
+            <textarea id="descripcion"></textarea>
+            <button id="add" onclick="tienda.insertProduct(event)">Añadir Producto</button>
+        </form>
+    </div>
+    <div class="columna-der columna columna-der">
+        <h3>Listado de productos:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

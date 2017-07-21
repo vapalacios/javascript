@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="main.js" defer></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="selectores">
+            <div>
+                <label> Marca del Coche</label>
+            </div>
+            <div>
+                <select id="marcaSelect" onchange="setBrand(this.value)">
+                    <option value="Seleccione">Seleccione Marca</option>
+                </select>
+            </div>
+            <div>
+                <label> Modelo del Coche</label>
+            </div>
+            <div>
+                <select id="carsSelect" onchange="setModel(this.value)">
+                    <option value="Seleccione">Seleccione Modelo</option>
+                </select>
+            </div>
+            <div>
+                <label> Imagen del Coche</label>
+            </div>
+            <div>
+                <select id="imgSelect" onchange="setImg(this.value)">
+                    <option value="Seleccione">Seleccione Imagen</option>
+                </select>
+                <span id="imgSelected">
+                	Vehiculo 1<img src="vehiculos/vehiculo1.png">
+                	Vehiculo 2<img src="vehiculos/vehiculo2.png">
+                	Vehiculo 3<img src="vehiculos/vehiculo3.png">
+                	Vehiculo 4<img src="vehiculos/vehiculo4.png">
+                	Vehiculo 5<img src="vehiculos/vehiculo5.png">
+                	Vehiculo 6<img src="vehiculos/vehiculo6.png">
+                </span>
+            </div>
+            <div>
+                <label> Velocidad Máxima</label>
+            </div>
+            <div>
+                <input id="velocidad">
+            </div>
+            <div>
+                <button id="add" onclick="addCar()">Adicionar Coche</button>
+            </div>
+            <div>
+                <button onclick="engine()">Iniciar Carrera</button>
+            </div>
+        </div>
+        <div id="racing">
+        </div>
+    </div>
+</body>
+
+</html>
