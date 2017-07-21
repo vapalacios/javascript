@@ -395,6 +395,7 @@ class AdmComidas extends NavigablePage {
         super({ _url: data._url, _titulo: data._titulo, _nav: data._nav, _log: data._log });
         this._comidasApi = new ComidasApi();
         this._arrayComidas = [];
+        this._modal = new Modal();
     }
 
     pintarPage() {
@@ -503,8 +504,7 @@ class AdmComidas extends NavigablePage {
         divFooter.appendChild(buttonCerrar);
         divFooter.appendChild(buttonAction);
 
-        let modal = new Modal();
-        modal.pintarModal(divElement, divFooter, eventoClick.toUpperCase());
+        this._modal.pintarModal(divElement, divFooter, eventoClick.toUpperCase());
     }
 
     pintarBody() {
@@ -565,6 +565,7 @@ class AdmBebidas extends NavigablePage {
         super({ _url: data._url, _titulo: data._titulo, _nav: data._nav, _log: data._log });
         this._bebidaApi = new BebidasApi();
         this._arrayBebidas = [];
+        this._modal = new Modal();
     }
 
     pintarPage() {
@@ -679,8 +680,7 @@ class AdmBebidas extends NavigablePage {
         divFooter.appendChild(buttonCerrar);
         divFooter.appendChild(buttonAction);
 
-        let modal = new Modal();
-        modal.pintarModal(divElement, divFooter, eventoClick.toUpperCase());
+        this._modal.pintarModal(divElement, divFooter, eventoClick.toUpperCase());
     }
 
     pintarBody() {
