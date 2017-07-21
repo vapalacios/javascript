@@ -45,6 +45,10 @@ class Page {
         this._logController = data._log;
     }
 
+    pintarMensaje(){
+    	console.warn("Debes implementar el pintado");
+    }
+
     pintarPage() {
         console.warn("Debes implementar el pintado");
     }
@@ -138,7 +142,6 @@ class LoginController {
         if ((_userLogin.username && _userLogin.password) && (_userLogin.username.length >= 4 && _userLogin.password.length >= 4)) {
             this._userApi.postLogin(_userLogin).then(
                 (data) => {
-                    console.log(data.msg);
                     if (data.msg.username) {
                         this.setLocalStorage(data.msg, _userLogin.password);
                         nav.navigateToHome();
@@ -170,7 +173,6 @@ class LoginController {
             }
             this._userApi.postLogin(_userLogin).then(
                 (data) => {
-                    console.log(data.msg);
                     if (data.msg.username) {
                         this.setLocalStorage(data.msg, _userLogin.password);
                         nav.navigateToHome();
@@ -277,7 +279,8 @@ class NavigablePage extends Page {
 class Home extends NavigablePage {
     constructor(data) {
         super({ _url: data._url, _titulo: data._titulo, _nav: data._nav, _log: data._log });
-        this._homeApi = new HomeApi();
+        this._bebidasApi = new BebidasApi();
+        this._comidasApi = new ComidasApi();
         this._arrayBebidas = [];
         this._arrayComidas = [];
         this._itemBebida = [];
@@ -287,7 +290,7 @@ class Home extends NavigablePage {
     }
 
     pintarPage() {
-        this._homeApi.getBebidas().then(
+        this._bebidasApi.getBebidas().then(
             (data) => {
                 this._arrayBebidas = data.arrayBebidas;
                 this.obtenerComidas();
@@ -296,7 +299,7 @@ class Home extends NavigablePage {
     }
 
     obtenerComidas() {
-        this._homeApi.getComidas().then(
+        this._comidasApi.getComidas().then(
             (data) => {
                 this._arrayComidas = data.arrayComidas;
                 this.resumenHome();
@@ -322,25 +325,25 @@ class Home extends NavigablePage {
         let divElement = Utilities.crearElemento("div", "", "", { "class": "carousel-inner" });
 
         let divCaro1 = Utilities.crearElemento("div", "", "", { "class": "item active" });
-        let aImage1 = Utilities.crearElemento("div", "", "", { "href": "#bebida" });
+        let divImage1 = Utilities.crearElemento("div", "", "", null);
         let imgBebidas = Utilities.crearElemento("img", "", "", { 'src': "img/bebidas.jpg", 'alt': "Bebidas", "class": "anchoImgDash", "data-link": "#bebida" });
-        aImage1.appendChild(imgBebidas);
+        divImage1.appendChild(imgBebidas);
         let divDetaBebida = Utilities.crearElemento("div", "", "", { "class": "carousel-caption" });
         let h3Bebidas = Utilities.crearElemento("h3", "", "Bebidas", null);
         let pBebidas = Utilities.crearElemento("p", "", this._mensajeBebida, null);
-        divCaro1.appendChild(aImage1);
+        divCaro1.appendChild(divImage1);
         divDetaBebida.appendChild(h3Bebidas);
         divDetaBebida.appendChild(pBebidas);
         divCaro1.appendChild(divDetaBebida);
 
         let divCaro2 = Utilities.crearElemento("div", "", "", { "class": "item" });
-        let aImage2 = Utilities.crearElemento("div", "", "", { "href": "#comida" });
+        let divImage2 = Utilities.crearElemento("div", "", "", null);
         let imgComidas = Utilities.crearElemento("img", "", "", { 'src': "img/comidas.jpg", 'alt': "Comidas", "class": "anchoImgDash", "data-link": "#comida" });
-        aImage2.appendChild(imgComidas);
+        divImage2.appendChild(imgComidas);
         let divDetaComida = Utilities.crearElemento("div", "", "", { "class": "carousel-caption" });
         let h3Comidas = Utilities.crearElemento("h3", "", "Comidas", null);
         let pComidas = Utilities.crearElemento("p", "", this._mensajeComida, null);
-        divCaro2.appendChild(aImage2);
+        divCaro2.appendChild(divImage2);
         divDetaComida.appendChild(h3Comidas);
         divDetaComida.appendChild(pComidas);
         divCaro2.appendChild(divDetaComida);
@@ -360,7 +363,9 @@ class Home extends NavigablePage {
         divCarousel.addEventListener("click", (event) => {
             let img = event.target;
             let url = img.getAttribute("data-link");
-            this._navigationController.navigateToUrl(url);
+            if(url){
+            	this._navigationController.navigateToUrl(url);
+            }
         });
 
         return divCarousel;
@@ -893,7 +898,7 @@ class Perfil extends NavigablePage {
             username: document.getElementById("usr").value,
             password: document.getElementById("pwd").value
         });
-        this._userApi.postUser(obj).then(
+        this._userApi.postUser(id, obj).then(
             (data) => {
                 this.pintarMensaje(data.msg, "#login");
             }

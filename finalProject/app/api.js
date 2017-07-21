@@ -30,8 +30,8 @@ class Comida extends Producto {
         let buttonElement = null;
         for (let i in botones) {
             botones[i].forEach((x) => {
-                buttonElement = Utilities.crearElemento("button", x.id, x.nombre, { class: "btn btn-primary btn-sm"});
-                buttonElement.addEventListener("click", (event)=>x.eventoClick(event, this.id));
+                buttonElement = Utilities.crearElemento("button", x.id, x.nombre, { class: "btn btn-primary btn-sm" });
+                buttonElement.addEventListener("click", (event) => x.eventoClick(event, this.id));
             });
             tdElement.appendChild(buttonElement);
         }
@@ -48,7 +48,7 @@ class Bebida extends Producto {
     }
 
     pintarStock(botones) {
-    	let _price = Utilities.getFormatCurrencyNumber(Number.parseInt(this.precio));
+        let _price = Utilities.getFormatCurrencyNumber(Number.parseInt(this.precio));
         let _alcoholic = this.esAlcoholica ? "Si" : "No";
         let _trElement = document.createElement("tr");
         let _rowDrink = `<td>${_alcoholic}</td>
@@ -63,7 +63,7 @@ class Bebida extends Producto {
         for (let i in botones) {
             botones[i].forEach((x) => {
                 buttonElement = Utilities.crearElemento("button", x.id, x.nombre, { class: "btn btn-primary btn-sm" });
-                buttonElement.addEventListener("click", (event)=>x.eventoClick(event, this.id));
+                buttonElement.addEventListener("click", (event) => x.eventoClick(event, this.id));
             });
             tdElement.appendChild(buttonElement);
         }
@@ -72,21 +72,18 @@ class Bebida extends Producto {
     }
 }
 
-class ConfApi{
-	constructor(){
-		this._urlBase = "http://formacion-indra-franlindebl.com/api";
-        this._urlPathComidas = "/comidas";
-        this._urlPathBebidas = "/bebidas";
-        this._urlPathLogin = "/login";
-        this._urlPathUsers = "/users";
-        this._urlPath = "/";
+class ConfApi {
+    constructor() {
+        this._urlBase = "http://formacion-indra-franlindebl.com/api";
         this.apiClient = new APIClient();
-	}
+    }
 }
 
-class BebidasApi extends ConfApi{
+class BebidasApi extends ConfApi {
     constructor() {
         super();
+        this._urlPathBebidas = "/bebidas";
+        this._urlPath = "/";
     }
 
     getBebidas() {
@@ -165,9 +162,11 @@ class BebidasApi extends ConfApi{
     }
 }
 
-class ComidasApi extends ConfApi{
+class ComidasApi extends ConfApi {
     constructor() {
         super();
+        this._urlPathComidas = "/comidas";
+        this._urlPath = "/";
     }
 
     getComidas() {
@@ -181,7 +180,7 @@ class ComidasApi extends ConfApi{
             (response) => {
                 //manejo de la respuesta de la clase APIClient
                 response.forEach((x) => {
-                	objToParse.id = x._id;
+                    objToParse.id = x._id;
                     objToParse.precio = x.precio;
                     objToParse.calorias = x.calorias;
                     objToParse.existencias = x.existencias;
@@ -241,9 +240,12 @@ class ComidasApi extends ConfApi{
     }
 }
 
-class UserApi extends ConfApi{
+class UserApi extends ConfApi {
     constructor() {
         super();
+        this._urlPathLogin = "/login";
+        this._urlPathUsers = "/users";
+        this._urlPath = "/";
     }
 
     getUser() {
@@ -257,8 +259,8 @@ class UserApi extends ConfApi{
             (response) => {
                 //manejo de la respuesta de la clase APIClient
                 response.forEach((x) => {
-                	objToParse.id = x._id;
-                	objToParse.email = x.email;
+                    objToParse.id = x._id;
+                    objToParse.email = x.email;
                     objToParse.apellidos = x.apellidos;
                     objToParse.nombre = x.nombre;
                     objToParse.user = x.username;
@@ -274,10 +276,10 @@ class UserApi extends ConfApi{
         return promise;
     }
 
-    delUser(id) {
+    delUser(id, data) {
         let url = this._urlBase + this._urlPathUsers + this._urlPath + id;
         let objResult = { msg: "" }
-        let promise = this.apiClient.xhrPeticion(url, null, "DELETE").then(
+        let promise = this.apiClient.xhrPeticion(url, data, "DELETE").then(
             (response) => {
                 //manejo de la respuesta de la clase APIClient
                 objResult.msg = response;
@@ -316,75 +318,13 @@ class UserApi extends ConfApi{
         return promise;
     }
 
-    postLogin(dataPost){
-    	let url = this._urlBase + this._urlPathUsers + this._urlPathLogin;
+    postLogin(dataPost) {
+        let url = this._urlBase + this._urlPathUsers + this._urlPathLogin;
         let objResult = { msg: "" }
         let promise = this.apiClient.xhrPeticion(url, dataPost, "POST").then(
             (response) => {
                 //manejo de la respuesta de la clase APIClient
                 objResult.msg = response;
-                return objResult;
-            }
-        );
-        //retornará una promesa
-        return promise;
-    }
-}
-
-class HomeApi extends ConfApi{
-    constructor() {
-        super();
-    }
-
-    getBebidas() {
-        let url = this._urlBase + this._urlPathBebidas;
-        let objResult = {
-            //objeto de resspuesta
-            arrayBebidas: []
-        }
-        let objToParse = { id: null, precio: null, calorias: null, existencias: null, nombre: null, grados: null, esAlcoholica: null }
-        let promise = this.apiClient.xhrPeticion(url, null, "GET").then(
-            (response) => {
-                //manejo de la respuesta de la clase APIClient
-                response.forEach((x) => {
-                    objToParse.id = x._id;
-                    objToParse.precio = x.precio;
-                    objToParse.calorias = x.calorias;
-                    objToParse.existencias = x.existencias;
-                    objToParse.nombre = x.nombre;
-                    objToParse.grados = x.grados;
-                    objToParse.esAlcoholica = x.esAlcoholica;
-                    let bebida = new Bebida(objToParse);
-                    objResult.arrayBebidas.push(bebida);
-                });
-                return objResult;
-            }
-        );
-        //retornará una promesa
-        return promise;
-    }
-
-    getComidas() {
-        let url = this._urlBase + this._urlPathComidas;
-        let objResult = {
-            //objeto de resspuesta
-            arrayComidas: []
-        }
-        let objToParse = { id: null, precio: null, calorias: null, existencias: null, nombre: null, tipo: null }
-        let promise = this.apiClient.xhrPeticion(url, null, "GET").then(
-            (response) => {
-                //manejo de la respuesta de la clase APIClient
-                response.forEach((x) => {
-                	objToParse.id = x._id;
-                    objToParse.precio = x.precio;
-                    objToParse.calorias = x.calorias;
-                    objToParse.existencias = x.existencias;
-                    objToParse.nombre = x.nombre;
-                    objToParse.tipo = x.tipo;
-                    let comida = new Comida(objToParse);
-                    objResult.arrayComidas.push(comida);
-                    // console.log(objResult.arrayComidas);
-                });
                 return objResult;
             }
         );
@@ -400,11 +340,9 @@ class APIClient {
         let myHeaders = new Headers();
         let dataSend = dataRequest;
 
-        if (type == "POST" || type == "PUT") {
+        if (dataRequest) {
+            dataSend = JSON.stringify(dataRequest);
             myHeaders.append('Content-Type', 'application/json');
-            try{
-            	dataSend = JSON.stringify(dataRequest);
-            }catch (e){ console.erro(e);}
         }
 
         let init = {
