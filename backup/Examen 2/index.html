@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>La tienda de Fran</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+</head>
+
+<body>
+	<div class="columna-izq columna">
+		<h1>Tienda de Fran</h1>
+		<p class="ligth">Calle general mariano escobedo 303</p>
+		<h2>Añadir producto:</h2>
+		<form>
+			<label>Nombre:</label>
+			<input type="text" name="nombre">
+			<label>URL:</label>
+			<input type="text" name="url">
+			<label>Precio:</label>
+			<input type="text" name="precio">
+			<label>Descripción:</label>
+			<textarea name="descripcion"></textarea>
+			<button class="button-main">Añadir Producto</button>
+		</form>
+	</div>
+	<div class="columna-der columna">
+		<h3>Listado de productos:</h3>
+		<table>
+			<thead>
+				<tr>
+					<td>Imagen</td>
+					<td>Nombre</td>
+					<td>Precio</td>
+					<td>Descripción</td>
+					<td>Acciones</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<img class ="img-small" src="http://www.gasoilonline.com/images/CAMI%20ROJA.jpg">
+					</td>
+					<td>Camiseta roja</td>
+					<td>10€</td>
+					<td>Camiseta de algodón</td>
+					<td>
+						<button class="button-main">Borrar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
